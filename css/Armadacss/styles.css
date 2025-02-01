@@ -1,0 +1,15 @@
+body {
+    margin: 0px;
+    overflow: hidden;
+    font-family: Monospace;
+}
+
+#content {
+    position: relative;
+}
+
+canvas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
