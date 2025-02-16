@@ -33,8 +33,8 @@
 
 
   <a-scene embedded arjs id="ARSceneWeb">
-     <!-- Cámara sin zoom -->
-     <a-entity camera position="0 0 0" fov="120" look-controls="pointerLockEnabled: false; touchEnabled: false;"></a-entity>
+    <!-- Cámara sin zoom -->
+    <a-entity camera position="0 0 0" fov="180" look-controls=false></a-entity>
 
     <!-- Marker para letterA.patt -->
     <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerVideo">
@@ -75,7 +75,11 @@
   <!-- Video cargado que usaremos en AR -->
   <video id="videoSrc" src="./assets/video/sintel.mp4" preload="auto" loop></video>
   <!-- Audio cargado que usaremos en AR -->
-  <audio id="AudioSrc" src="./assets/Sound/pipipi.mp3" preload="auto" loop></audio>
+   <audio controls autoplay muted id="AudioSrc">
+    <source src="./assets/Sound/pipipi.ogg" type="audio/ogg">
+    <source src="./assets/Sound/pipipi.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
   <!-- Panel de oscurecimiento -->
   <div id="overlay"></div>
@@ -87,8 +91,8 @@
     <button onclick="closePopup()">Cerrar</button>
   </div>
 
-<script src="js/Viedo-PopUp.js"></script>
-<script src="js/Button.js"></script>
+  <script src="js/Viedo-PopUp.js"></script>
+  <script src="js/Button.js"></script>
   <script src="js/Video.js"></script>
   <script src="js/Sound.js"></script>
   <script src="js/PopUp.js"></script>

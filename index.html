@@ -1,13 +1,35 @@
 <!DOCTYPE html>
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-<!-- include aframe-ar.js -->
-<script src="dist/a-frame/aframe-ar.js"></script>
+<head>
+  <title>AR.js Proyecto</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="./css/VideoPopup.css">
+  <link rel="stylesheet" href="css/popUp.css">
+  
+  <script
+    src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+  <!-- include aframe-ar.js -->
+  <script src="dist/a-frame/aframe-ar.js"></script>
+</head>
+
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
-	<!-- <a-scene embedded arjs='sourceType: image; sourceUrl:../../data/images/armchair.jpg;'> -->
-	<a-scene embedded arjs='sourceType: webcam;'>
-        <!-- Marker para letterA.patt -->
+ <!-- Contenedor del video en popup -->
+  <div id="video-popup" class="video-popup">
+    <div class="popup-content">
+      <video id="video-banner" autoplay muted>
+        <source src="./Assets/video/IntroVideo.mp4" type="video/mp4">
+        Tu navegador no soporta el formato de video.
+      </video>
+    </div>
+  </div>
+
+  <button id="stickyButton"></button>
+
+  <!-- <a-scene embedded arjs='sourceType: image; sourceUrl:../../data/images/armchair.jpg;'> -->
+  <a-scene embedded arjs='sourceType: webcam;'>
+    <!-- Marker para letterA.patt -->
     <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerVideo">
       <a-video src="#videoSrc" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
       </a-video>
@@ -19,11 +41,44 @@
       <a-image src="assets/IMG/largo.png" position="0 0.5 0" rotation="0 45 0" scale="2 2 2"></a-image>
       <a-image src="assets/IMG/largo.png" position="0 0.5 0" rotation="0 -45 0" scale="2 2 2"></a-image>
     </a-marker>
-		<a-entity camera></a-entity>
-	</a-scene>
+    <!-- Marker para letterC.patt -->
+    <a-marker preset="custom" type="pattern" url="./data/letterC.patt" id="markerSound">
+      <!--  Caja que también tendrá el sonido -->
+      <a-box position="0 0.5 0" rotation="0 45 0" color="#FF5733" scale="1 1 1"></a-box>
+      <!-- Componente de sonido-->
+      <a-sound src="#AudioSrc" autoplay="true" position="0 1 0"></a-sound>
+    </a-marker>
 
-   <!-- Video cargado que usaremos en AR -->
-   <video id="videoSrc" src="./assets/video/sintel.mp4" preload="auto" loop></video>
-  
+    <!-- Marker para letterD.patt -->
+    <a-marker preset="custom" type="pattern" url="./data/letterD.patt" id="markerPopUp">
+      <a-box position="0 0.5 0" rotation="0 45 0" color="#000" scale="1 1 1"></a-box>
+    </a-marker>
+
+    <a-entity camera position="0 0 0" look-controls=" markersAreaEnabled: false; touchEnabled: false;"></a-entity>
+  </a-scene>
+
+
+  <!-- Video cargado que usaremos en AR -->
+  <video id="videoSrc" src="./assets/video/sintel.mp4" preload="auto" loop></video>
+  <!-- Audio cargado que usaremos en AR -->
+  <audio id="AudioSrc" src="./assets/Sound/pipipi.mp3" preload="auto" loop></audio>
+  <!-- Panel de oscurecimiento -->
+  <div id="overlay"></div>
+  <!-- Pop-up -->
+  <div id="popup">
+    <img src="https://via.placeholder.com/100" alt="Imagen de ejemplo">
+    <h2>¡Marcador Detectado!</h2>
+    <p>Has escaneado el marcador correctamente. ¡Aquí tienes más información!</p>
+    <button onclick="closePopup()">Cerrar</button>
+  </div>
+
+
+  <script src="js/Viedo-PopUp.js"></script>
+  <script src="js/Button.js"></script>
   <script src="js/Video.js"></script>
-</body></html>
+  <script src="js/Sound.js"></script>
+  <script src="js/PopUp.js"></script>
+
+</body>
+
+</html>
