@@ -7,10 +7,23 @@
 
 	<!-- <a-scene embedded arjs='sourceType: image; sourceUrl:../../data/images/armchair.jpg;'> -->
 	<a-scene embedded arjs='sourceType: webcam;'>
-        <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerVideo">
-            <a-sphere position="0 0.5 0" radius="0.5" color="#EF2D5E"></a-sphere>
-            <a-plane position="0 0 0" rotation="-90 0 0" width="1" height="1" color="#7BC8A4"></a-plane>
-        </a-marker>
+        <!-- Marker para letterA.patt -->
+    <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerVideo">
+      <a-video src="#videoSrc" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
+      </a-video>
+    </a-marker>
+
+    <!-- Marker para letterB.patt -->
+    <a-marker preset="custom" type="pattern" url="./data/letterB.patt" id="markerImg">
+      <!--  Imagen en lugar de caja-->
+      <a-image src="assets/IMG/largo.png" position="0 0.5 0" rotation="0 45 0" scale="2 2 2"></a-image>
+      <a-image src="assets/IMG/largo.png" position="0 0.5 0" rotation="0 -45 0" scale="2 2 2"></a-image>
+    </a-marker>
 		<a-entity camera></a-entity>
 	</a-scene>
+
+   <!-- Video cargado que usaremos en AR -->
+   <video id="videoSrc" src="./assets/video/sintel.mp4" preload="auto" loop></video>
+  
+  <script src="js/Video.js"></script>
 </body></html>
