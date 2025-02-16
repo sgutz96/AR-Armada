@@ -10,9 +10,7 @@
   <link rel="stylesheet" href="./css/VideoPopup.css">
   <link rel="stylesheet" href="css/popUp.css">
 
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-
 
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
@@ -27,15 +25,15 @@
         Tu navegador no soporta el formato de video.
       </video>
     </div>
-  </div>
-
+  </div>  
+  <!--  -->
   <button id="stickyButton"></button>
 
-
+  <!--  -->
   <a-scene embedded arjs id="ARSceneWeb">
     <!-- Cámara sin zoom -->
     <a-entity camera position="0 0 0" fov="180" look-controls=false></a-entity>
-
+    
     <!-- Marker para letterA.patt -->
     <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerVideo">
       <a-video src="#videoSrc" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
@@ -72,6 +70,8 @@
       <a-box position="0 0.5 0" rotation="0 45 0" color="#5733" scale="1 1 1"></a-box>
     </a-marker>
   </a-scene>
+
+
   <!-- Video cargado que usaremos en AR -->
   <video id="videoSrc" src="./assets/video/sintel.mp4" preload="auto" loop></video>
   <!-- Audio cargado que usaremos en AR -->

@@ -1,21 +1,40 @@
 <!DOCTYPE html>
-<head>
-  <title>AR.js Proyecto</title>
 
-  <link rel="stylesheet" href="css/styles.css">
+<head>
+
+  <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/VideoPopup.css">
-  <link rel="stylesheet" href="css/popUp.css">
-  
-  <script
-    src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+  <link rel="stylesheet" href="./css/popUp.css">
+
+  <!-- Eliminando una de las dos líneas -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe@1.6.0/dist/aframe-master.min.js"></script>
+
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script>
+    AFRAME.registerComponent('modify-materials', {
+      init: function () {
+        // Wait for model to load.
+        this.el.addEventListener('model-loaded', () => {
+          // Grab the mesh / scene.
+          const obj = this.el.getObject3D('mesh');
+          // Go over the submeshes and modify materials we want.
+          obj.traverse(node => {
+            if (node.name.indexOf('ship') !== -1) {
+              node.material.color.set('red');
+            }
+          });
+        });
+      }
+    });
+  </script> 
   <!-- include aframe-ar.js -->
-  <script src="dist/a-frame/aframe-ar.js"></script>
+  <script src="./dist/a-frame/aframe-ar.js"></script>
+
 </head>
 
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-
- <!-- Contenedor del video en popup -->
+  <!-- Contenedor del video en popup -->
   <div id="video-popup" class="video-popup">
     <div class="popup-content">
       <video id="video-banner" autoplay muted>
@@ -24,15 +43,16 @@
       </video>
     </div>
   </div>
-
+  <!--  -->
   <button id="stickyButton"></button>
 
-  <!-- <a-scene embedded arjs='sourceType: image; sourceUrl:../../data/images/armchair.jpg;'> -->
-  <a-scene embedded arjs='sourceType: webcam;'>
+  <a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix;' renderer='precision: medium;'
+    id="sceneAR">
     <!-- Marker para letterA.patt -->
     <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerVideo">
       <a-video src="#videoSrc" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
       </a-video>
+      
     </a-marker>
 
     <!-- Marker para letterB.patt -->
@@ -41,6 +61,7 @@
       <a-image src="assets/IMG/largo.png" position="0 0.5 0" rotation="0 45 0" scale="2 2 2"></a-image>
       <a-image src="assets/IMG/largo.png" position="0 0.5 0" rotation="0 -45 0" scale="2 2 2"></a-image>
     </a-marker>
+
     <!-- Marker para letterC.patt -->
     <a-marker preset="custom" type="pattern" url="./data/letterC.patt" id="markerSound">
       <!--  Caja que también tendrá el sonido -->
@@ -52,32 +73,86 @@
     <!-- Marker para letterD.patt -->
     <a-marker preset="custom" type="pattern" url="./data/letterD.patt" id="markerPopUp">
       <a-box position="0 0.5 0" rotation="0 45 0" color="#000" scale="1 1 1"></a-box>
+      </a-box>
     </a-marker>
 
-    <a-entity camera position="0 0 0" look-controls=" markersAreaEnabled: false; touchEnabled: false;"></a-entity>
+
+
+
+
+
+    <!-- Marker para letterF.patt -->
+    <a-marker preset="custom" type="pattern" url="./data/letterF.patt" id="markerF">
+      <!-- Modelo 3D (por ejemplo, un zorro) cargado desde un archivo .glb -->
+      <a-scene
+  renderer="colorManagement: true;"
+  info-message="htmlSrc: #messageText"
+  model-viewer="gltfModel: #triceratops; title: Triceratops">
+  <a-assets>
+    <!--
+      Model source: https://sketchfab.com/3d-models/triceratops-d16aabe33dc24f8ab37e3df50c068265
+      Model author: https://sketchfab.com/VapTor
+      Model license: Sketcfab Standard
+    -->
+    <a-asset-item id="triceratops"
+      src="https://cdn.aframe.io/examples/ar/models/triceratops/scene.gltf"
+      response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+
+    <a-asset-item id="reticle"
+      src="https://cdn.aframe.io/examples/ar/models/reticle/reticle.gltf"
+      response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+
+    <img id="shadow" src="https://cdn.glitch.com/20600112-c04b-492c-8190-8a5ccc06f37d%2Fshadow.png?v=1606338852399"></img>
+    <a-asset-item id="messageText" src="message.html"></a-asset-item>
+  </a-assets>
+</a-scene>
+      <a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:pink;'>
+      </a-box>
+    </a-marker>
+
+
+    <!-- Marker para letterG.patt -->
+    <a-marker preset="custom" type="pattern" url="./data/letterG.patt" id="">
+      <a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:green;'>
+        <a-torus-knot radius='0.26' radius-tubular='0.05'
+          animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+        </a-torus-knot>
+      </a-box>
+    </a-marker>
+
+
+    <!-- add a simple camera -->
+    <a-entity camera></a-entity>
   </a-scene>
 
 
   <!-- Video cargado que usaremos en AR -->
   <video id="videoSrc" src="./assets/video/sintel.mp4" preload="auto" loop></video>
   <!-- Audio cargado que usaremos en AR -->
-  <audio id="AudioSrc" src="./assets/Sound/pipipi.mp3" preload="auto" loop></audio>
+  <audio controls id="AudioSrc">
+    <source src="./assets/Sound/audio_1.ogg" type="audio/ogg">
+    <source src="./assets/Sound/audio_1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
   <!-- Panel de oscurecimiento -->
   <div id="overlay"></div>
   <!-- Pop-up -->
-  <div id="popup">
-    <img src="https://via.placeholder.com/100" alt="Imagen de ejemplo">
-    <h2>¡Marcador Detectado!</h2>
-    <p>Has escaneado el marcador correctamente. ¡Aquí tienes más información!</p>
+  <div id="popupAR">
+    <img src="/assets/IMG/pos-28.jpg" alt="Imagen de ejemplo">
+    <h2>¡Amazonas!</h2>
+    <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto
+      de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la
+      imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos
+      especimen. </p>
     <button onclick="closePopup()">Cerrar</button>
   </div>
-
 
   <script src="js/Viedo-PopUp.js"></script>
   <script src="js/Button.js"></script>
   <script src="js/Video.js"></script>
   <script src="js/Sound.js"></script>
   <script src="js/PopUp.js"></script>
+
 
 </body>
 

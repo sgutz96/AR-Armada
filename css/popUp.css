@@ -12,48 +12,50 @@
       }
   
       /* Estilo para el pop-up */
-      #popup {
+      #popupAR {
         display: none;
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        padding: 20px;
         background-color: white;
         color: black;
         border-radius: 10px;
-        width: 300px;
+        width: 60vw;
         text-align: center;
         z-index: 1000;
+        background-image: url(../assets/IMG/BG_MenuPopUP.png);
+        padding: 0 0 20px 0;
+        overflow: hidden;
       }
   
-      #popup img {
-        width: 100px;
+      #popupAR img {
+        width: 100%;
         /* Tamaño de la imagen */
-        height: auto;
+        height: 40vh;
         margin-bottom: 15px;
       }
   
-      #popup h2 {
+      #popupAR h2 {
         font-size: 20px;
         margin-bottom: 10px;
       }
   
-      #popup p {
+      #popupAR p {
         font-size: 14px;
         margin-bottom: 15px;
       }
   
-      #popup button {
+      #popupAR button {
         padding: 10px 20px;
         font-size: 16px;
-        background-color: #007bff;
+        background-color: #4CAF50;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
       }
   
-      #popup button:hover {
-        background-color: #0056b3;
+      #popupAR button:hover {
+        background-color: #368038;
       }
