@@ -33,6 +33,9 @@
 
 
   <a-scene embedded arjs id="ARSceneWeb">
+     <!-- Cámara sin zoom -->
+     <a-entity camera position="0 1.6 0" fov="120" look-controls="pointerLockEnabled: false; touchEnabled: false;"></a-entity>
+
     <!-- Marker para letterA.patt -->
     <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerVideo">
       <a-video src="#videoSrc" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
@@ -68,9 +71,6 @@
     <a-marker preset="custom" type="pattern" url="./data/letterF.patt">
       <a-box position="0 0.5 0" rotation="0 45 0" color="#5733" scale="1 1 1"></a-box>
     </a-marker>
-
-    <!-- Cámara -->
-    <a-entity camera></a-entity>
   </a-scene>
   <!-- Video cargado que usaremos en AR -->
   <video id="videoSrc" src="./assets/video/sintel.mp4" preload="auto" loop></video>
