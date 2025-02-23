@@ -3,25 +3,27 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR.js Proyecto</title>
 
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/VideoPopup.css">
-  <link rel="stylesheet" href="css/popUp.css">
+  <link rel="stylesheet" href="./css/popUp.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe@1.6.0/dist/aframe-master.min.js"></script>
+  
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  
+  <!-- include aframe-ar.js -->
+  <script src="./dist/a-frame/aframe-ar.js"></script>
 
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
 </head>
 
+<!-- Contenedor del video en popup -->
 <body style="margin: 0; overflow: hidden;">
   <!-- Contenedor del video en popup -->
   <div id="video-popup" class="video-popup">
     <div class="popup-content">
       <video id="video-banner" autoplay muted>
-        <source src="./Assets/video/IntroVideo.mp4" type="video/mp4">
+        <source src="./assets/video/IntroVideo.mp4" type="video/mp4">
         Tu navegador no soporta el formato de video.
       </video>
     </div>
@@ -29,15 +31,14 @@
   <!--  -->
   <button id="stickyButton"></button>
 
-  <!--  -->
-  <a-scene embedded arjs id="ARSceneWeb">
-    <!-- Cámara sin zoom -->
-    <a-entity camera position="0 0 0" fov="180" look-controls=false></a-entity>
+  <a-scene embedded="" arjs="" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="" device-orientation-permission-ui="">
+
     
     <!-- Marker para letterA.patt -->
     <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerVideo">
       <a-video src="#videoSrc" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
       </a-video>
+      
     </a-marker>
 
     <!-- Marker para letterB.patt -->
@@ -58,36 +59,60 @@
     <!-- Marker para letterD.patt -->
     <a-marker preset="custom" type="pattern" url="./data/letterD.patt" id="markerPopUp">
       <a-box position="0 0.5 0" rotation="0 45 0" color="#000" scale="1 1 1"></a-box>
+      </a-box>
     </a-marker>
 
-    <!-- Marker para letterE.patt -->
-    <a-marker preset="custom" type="pattern" url="./data/letterE.patt">
-      <a-box position="0 0.5 0" rotation="0 45 0" color="#fff" scale="1 1 1"></a-box>
-    </a-marker>
+
+
+
+
 
     <!-- Marker para letterF.patt -->
-    <a-marker preset="custom" type="pattern" url="./data/letterF.patt">
-      <a-box position="0 0.5 0" rotation="0 45 0" color="#5733" scale="1 1 1"></a-box>
+    <a-marker preset="custom" type="pattern" url="./data/letterF.patt" id="markerF">
+      <!-- Modelo 3D (por ejemplo, un zorro) cargado desde un archivo .glb -->
+     <a-entity
+        position="0 0 0"
+        rotation="0 0 0"
+        scale="0.05 0.05 0.05"
+        gltf-model="./assets/Modelos/trex/scene.gltf"
+        ></a-entity>
+      <a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:pink;'>
+      </a-box>
     </a-marker>
+
+
+    <!-- Marker para letterG.patt -->
+    <a-marker preset="custom" type="pattern" url="./data/letterG.patt" id="">
+      <a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:green;'>
+        <a-torus-knot radius='0.26' radius-tubular='0.05'
+          animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+        </a-torus-knot>
+      </a-box>
+    </a-marker>
+
+
+    <!-- add a simple camera -->
+    <a-entity camera></a-entity>
   </a-scene>
 
 
   <!-- Video cargado que usaremos en AR -->
   <video id="videoSrc" src="./assets/video/sintel.mp4" preload="auto" loop></video>
   <!-- Audio cargado que usaremos en AR -->
-   <audio controls autoplay muted id="AudioSrc">
-    <source src="./assets/Sound/pipipi.ogg" type="audio/ogg">
-    <source src="./assets/Sound/pipipi.mp3" type="audio/mpeg">
+  <audio controls id="AudioSrc">
+    <source src="./assets/Sound/audio_1.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
-
   <!-- Panel de oscurecimiento -->
   <div id="overlay"></div>
   <!-- Pop-up -->
-  <div id="popup">
-    <img src="https://via.placeholder.com/100" alt="Imagen de ejemplo">
-    <h2>¡Marcador Detectado!</h2>
-    <p>Has escaneado el marcador correctamente. ¡Aquí tienes más información!</p>
+  <div id="popupAR">
+    <img src="./assets/IMG/pos-28.jpg" alt="Imagen de ejemplo">
+    <h2>¡Amazonas!</h2>
+    <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto
+      de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la
+      imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos
+      especimen. </p>
     <button onclick="closePopup()">Cerrar</button>
   </div>
 
@@ -95,7 +120,8 @@
   <script src="js/Button.js"></script>
   <script src="js/Video.js"></script>
   <script src="js/Sound.js"></script>
-  <script src="js/PopUp.js"></script>
+  <script src="js/PopUp.js"></script> 
+
 
 </body>
 

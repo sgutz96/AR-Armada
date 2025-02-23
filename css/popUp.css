@@ -1,4 +1,4 @@
-    /* Estilo para oscurecer la pantalla */
+      /* Estilo para oscurecer la pantalla */
     #overlay {
         display: none;
         position: fixed;
@@ -8,7 +8,7 @@
         height: 100%;
         background-color: rgba(0, 0, 0, 0.7);
         /* Oscurece la pantalla */
-        z-index: 999;
+        z-index: 999; 
       }
   
       /* Estilo para el pop-up */

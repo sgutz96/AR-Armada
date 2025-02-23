@@ -3,107 +3,115 @@
 
 <head>
   <meta charset="UTF-8">
-  
 
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet" href="./css/VideoPopup.css">
   <link rel="stylesheet" href="./css/popUp.css">
 
-  <!-- Eliminando una de las dos líneas -->
+
   <script src="https://cdn.jsdelivr.net/npm/aframe@1.6.0/dist/aframe-master.min.js"></script>
 
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
- 
+
   <!-- include aframe-ar.js -->
   <script src="./dist/a-frame/aframe-ar.js"></script>
 
 </head>
 
+<!-- Contenedor del video en popup -->
 
 <body style="margin: 0; overflow: hidden;">
   <!-- Contenedor del video en popup -->
   <div id="video-popup" class="video-popup">
     <div class="popup-content">
       <video id="video-banner" autoplay muted>
-        <source src="./assets/video/IntroVideo.mp4" type="video/mp4">
+        <source src="./assets/video/IntroVideo.webm" type="video/mp4">
         Tu navegador no soporta el formato de video.
       </video>
     </div>
-  </div>  
+  </div>
   <!--  -->
   <button id="stickyButton"></button>
 
-  <a-scene embedded="" arjs="" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="" device-orientation-permission-ui="">
+  <a-scene embedded="" arjs="" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui=""
+    device-orientation-permission-ui="">
 
     <!-- Marker para letterA.patt -->
-    <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerVideo">
-      <a-video src="#videoSrc" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
-      </a-video>
-      
+    <a-marker preset="custom" type="pattern" url="./data/letterA.patt" id="markerPopUp_Web">
+
     </a-marker>
 
     <!-- Marker para letterB.patt -->
-    <a-marker preset="custom" type="pattern" url="./data/letterB.patt" id="markerImg">
-      <!--  Imagen en lugar de caja-->
-      <a-image src="assets/IMG/largo.png" position="0 0.5 0" rotation="0 45 0" scale="2 2 2"></a-image>
-      <a-image src="assets/IMG/largo.png" position="0 0.5 0" rotation="0 -45 0" scale="2 2 2"></a-image>
+    <a-marker preset="custom" type="pattern" url="./data/letterB.patt" id="markerSound">
+      <a-sound src="#AudioSrc" autoplay="true" position="0 1 0"></a-sound>
+      <a-entity position="0 0 0" rotation="0 0 0" scale="0.05 0.05 0.05" gltf-model="./assets/Modelos/trex/scene.gltf">
+      </a-entity>
     </a-marker>
 
     <!-- Marker para letterC.patt -->
-    <a-marker preset="custom" type="pattern" url="./data/letterC.patt" id="markerSound">
-      <!--  Caja que también tendrá el sonido -->
-      <a-box position="0 0.5 0" rotation="0 45 0" color="#FF5733" scale="1 1 1"></a-box>
-      <!-- Componente de sonido-->
-      <a-sound src="#AudioSrc" autoplay="true" position="0 1 0"></a-sound>
+    <a-marker preset="custom" type="pattern" url="./data/letterC.patt" id="">
+      <!-- Galería de imágenes 3D -->
+      <a-entity position="0 0 -1" scale="2 2 1" rotation="0 0 0">
+        <a-plane src="url(imagen1.jpg)" position="0 0 2" rotation="0 0 0" width="1" height="1"></a-plane>
+        <a-plane src="url(imagen2.jpg)" position="2 0 0" rotation="0 90 0" width="1" height="1"></a-plane>
+        <a-plane src="url(imagen3.jpg)" position="0 0 -2" rotation="0 0 0" width="1" height="1"></a-plane>
+        <a-plane src="url(imagen4.jpg)" position="-2 0 0" rotation="0 -90 0" width="1" height="1"></a-plane>
+      </a-entity>
     </a-marker>
 
     <!-- Marker para letterD.patt -->
-    <a-marker preset="custom" type="pattern" url="./data/letterD.patt" id="markerPopUp">
-      <a-box position="0 0.5 0" rotation="0 45 0" color="#000" scale="1 1 1"></a-box>
-      </a-box>
+    <a-marker preset="custom" type="pattern" url="./data/letterD.patt" id="markerVideo_DB">
+      <a-video src="#video_DB" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
+
+      </a-video>
     </a-marker>
 
+    <!-- Marker para letterE.patt -->
+    <a-marker preset="custom" type="pattern" url="./data/letterE.patt" id="markerVideo_CB">
+      <a-video src="#video_CB" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
 
-
-
-
+      </a-video>
+    </a-marker>
 
     <!-- Marker para letterF.patt -->
-    <a-marker preset="custom" type="pattern" url="./data/letterF.patt" id="markerF">
-      <!-- Modelo 3D (por ejemplo, un zorro) cargado desde un archivo .glb -->
-     <a-entity
-        position="0 0 0"
-        rotation="0 0 0"
-        scale="0.05 0.05 0.05"
-        gltf-model="./assets/Modelos/trex/scene.gltf"
-        ></a-entity>
-      <a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:pink;'>
-      </a-box>
-    </a-marker>
+    <a-marker preset="custom" type="pattern" url="./data/letterF.patt" id="markerVideo_MC">
+      <a-video src="#video_MC" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
 
+      </a-video>
+    </a-marker>
 
     <!-- Marker para letterG.patt -->
-    <a-marker preset="custom" type="pattern" url="./data/letterG.patt" id="">
-      <a-box position='0 0.5 0' material='opacity: 0.5; side: double;color:green;'>
-        <a-torus-knot radius='0.26' radius-tubular='0.05'
-          animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
-        </a-torus-knot>
-      </a-box>
+    <a-marker preset="custom" type="pattern" url="./data/letterG.patt" id="markerVideo_VB">
+      <a-video src="#video_VB" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
+
+      </a-video>
     </a-marker>
+
+    <!-- Marker para letterH.patt -->
+    <a-marker preset="custom" type="pattern" url="./data/letterH.patt" id="markerVideo_AE">
+      <a-video src="#video_AE" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" id="video1">
+
+      </a-video>
+    </a-marker>
+
 
 
     <!-- add a simple camera -->
-    <a-entity camera></a-entity>
+    <a-camera position="0 0 0" look-controls="enabled: true" raycaster="objects: .clickable"></a-camera>
   </a-scene>
 
 
   <!-- Video cargado que usaremos en AR -->
-  <video id="videoSrc" src="./assets/video/sintel.mp4" preload="auto" loop></video>
-  <!-- Audio cargado que usaremos en AR -->
-  <audio controls id="AudioSrc">
-    <source src="./assets/Sound/audio_1.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  <video class="VideosAR" id="video_DB" src="./assets/video/DocBinacional.webm" preload="auto" loop></video>
+  <!-- Video cargado que usaremos en AR -->
+  <video class="VideosAR" id="video_CB" src="./assets/video/CapBongo.webm" preload="auto" loop></video>
+  <!-- Video cargado que usaremos en AR -->
+  <video class="VideosAR" id="video_MC" src="./assets/video/MarcaColombia.webm" preload="auto" loop></video>
+  <!-- Video cargado que usaremos en AR -->
+  <video class="VideosAR" id="video_VB" src="./assets/video/VideoBinacional.webm" preload="auto" loop></video>
+  <!-- Video cargado que usaremos en AR -->
+  <video class="VideosAR" id="video_AE" src="./assets/video/ArmadaEntrenamiento.webm" preload="auto" loop></video>
+
   <!-- Panel de oscurecimiento -->
   <div id="overlay"></div>
   <!-- Pop-up -->
@@ -114,8 +122,16 @@
       de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la
       imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos
       especimen. </p>
+    <button onclick="closePopup()">Web</button>
     <button onclick="closePopup()">Cerrar</button>
   </div>
+
+  <!-- Audio cargado que usaremos en AR -->
+  <audio controls id="AudioSrc">
+    <source src="./assets/Sound/audio_1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
 
   <script src="js/Viedo-PopUp.js"></script>
   <script src="js/Button.js"></script>

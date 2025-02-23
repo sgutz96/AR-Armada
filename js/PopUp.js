@@ -1,5 +1,5 @@
 // Detectar la visibilidad del marcador
-const markerPopUp = document.getElementById('markerPopUp');
+const markerPopUp = document.getElementById('markerPopUp_Web');
 const popup = document.getElementById('popupAR');
 const overlay = document.getElementById('overlay');
 
